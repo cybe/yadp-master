@@ -4,7 +4,7 @@ RUN apk -U add git \
     && mkdir /build \
     && cd /build \
     # Build master of docker-java
-        && git clone https://github.com/docker-java/docker-java.git \
+        && git clone https://github.com/cybe/docker-java.git \
         && cd /build/docker-java \
         && export VERSION_DOCKER_JAVA="$(git rev-parse --abbrev-ref HEAD)-$(git rev-parse --short HEAD)" \
         && mvn -P'!docker-java-analyses' org.codehaus.mojo:versions-maven-plugin:2.4:set -DnewVersion=${VERSION_DOCKER_JAVA} \
@@ -14,7 +14,7 @@ RUN apk -U add git \
         && git clone https://github.com/KostyaSha/yet-another-docker-plugin.git \
         && cd yet-another-docker-plugin \
         && mvn -pl yet-another-docker-java org.codehaus.mojo:versions-maven-plugin:2.4:use-dep-version -DdepVersion=${VERSION_DOCKER_JAVA} -Dincludes=com.github.docker-java:docker-java \
-        && export VERSION_YADP="$(git rev-parse --abbrev-ref HEAD)-$(git rev-parse --short HEAD)" \
+        && export VERSION_YADP="1.0.3-SPU-$(git rev-parse --abbrev-ref HEAD)-$(git rev-parse --short HEAD)" \
         && mvn org.codehaus.mojo:versions-maven-plugin:2.4:set -DnewVersion=${VERSION_YADP} \
         && mvn -pl yet-another-docker-java org.codehaus.mojo:versions-maven-plugin:2.4:set -DnewVersion=${VERSION_YADP} \
         && mvn -DskipTests -Denforcer.skip=true install \
